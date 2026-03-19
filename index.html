@@ -139,18 +139,19 @@
   }
 
   .hero-left {
-    padding: 80px 48px;
+    padding: 64px 48px;
     border-right: 1px solid var(--border);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 40px;
   }
 
   .hero-right {
-    padding: 80px 48px;
+    padding: 64px 48px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
   }
 
   .hero-status {
@@ -798,13 +799,10 @@
 <!-- HERO -->
 <div class="hero">
   <div class="hero-left">
-    <div>
       <h1>
         Software<br>
         <span class="outline">Engin</span><span class="red">eer</span>
       </h1>
-    </div>
-    <div>
       <p class="hero-desc">
         Building <strong>high-performance distributed systems</strong> at scale.
         Currently at <strong>Microsoft Azure Storage</strong>, operating infrastructure
@@ -815,7 +813,6 @@
         <a href="https://linkedin.com/in/ayman-nawaz-71a2a71b9" class="btn btn-secondary" target="_blank">LinkedIn</a>
         <a href="mailto:mohammedaymannawaz@gmail.com" class="btn btn-secondary">Email</a>
       </div>
-    </div>
   </div>
 
   <div class="hero-right">
@@ -1073,15 +1070,14 @@
   <div class="contact-left">
     <div class="contact-label">Get in touch</div>
     <h2>Let's build<br><span class="outline">something</span><br>fast.</h2>
-    <p>Open to backend and infrastructure roles in Europe.<br>
-    NIT Surathkal · B.Tech Information Technology · GPA 9.08</p>
+    <p>NIT Surathkal · B.Tech Information Technology · GPA 9.08</p>
     <div class="hero-links">
-      <a href="mailto:mohammedaymannawaz@gmail.com" class="btn btn-primary">↗ Email Me</a>
+      <a href="/cdn-cgi/l/email-protection#15787a7d7478787071746c78747b7b7462746f557278747c793b767a78" class="btn btn-primary">↗ Email Me</a>
     </div>
   </div>
   <div class="contact-right">
-    <a href="mailto:mohammedaymannawaz@gmail.com" class="contact-link">
-      <span class="contact-link-label">mohammedaymannawaz@gmail.com</span>
+    <a href="/cdn-cgi/l/email-protection#8ce1e3e4ede1e1e9e8edf5e1ede2e2edfbedf6ccebe1ede5e0a2efe3e1" class="contact-link">
+      <span class="contact-link-label"><span class="__cf_email__" data-cfemail="4e2321262f23232b2a2f37232f20202f392f340e29232f2722602d2123">[email&#160;protected]</span></span>
       <span class="contact-link-arrow">↗</span>
     </a>
     <a href="https://linkedin.com/in/ayman-nawaz-71a2a71b9" class="contact-link" target="_blank">
@@ -1105,7 +1101,7 @@
   <div class="footer-cell">Built with nothing.</div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Custom cursor
   const cursor = document.getElementById('cursor');
   const cursorRing = document.getElementById('cursorRing');
@@ -1145,12 +1141,20 @@
         entry.target.classList.add('visible');
       }
     });
-  }, { threshold: 0.08 });
+  }, { threshold: 0.01, rootMargin: "0px 0px -20px 0px" });
 
   document.querySelectorAll('.reveal').forEach((el, i) => {
     el.style.transitionDelay = (i % 4) * 0.08 + 's';
     observer.observe(el);
   });
+
+  // Fallback: force show anything still hidden after 1s
+  setTimeout(() => {
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+      el.classList.add('visible');
+    });
+  }, 1000);
+
 </script>
 
 </body>
