@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayman Nawaz — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f5f5f0;
+    --white: #ffffff;
+    --black: #0d0d0d;
+    --red: #d9000d;
+    --border: #0d0d0d;
+    --muted: #888880;
+    --surface: #ededea;
+    --dot: rgba(13,13,13,0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--black);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    width: 8px; height: 8px;
+    background: var(--red);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s;
+  }
+
+  .cursor-ring {
+    width: 28px; height: 28px;
+    border: 1px solid var(--black);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.15s ease;
+  }
+
+  /* DOT MATRIX BACKGROUND */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(circle, var(--dot) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    padding: 0 48px;
+    height: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: var(--black);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nav-logo-dot {
+    width: 6px; height: 6px;
+    background: var(--red);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 0;
+    list-style: none;
+  }
+
+  .nav-links li { border-left: 1px solid var(--border); }
+  .nav-links li:last-child { border-right: 1px solid var(--border); }
+
+  .nav-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0 20px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    transition: all 0.15s;
+    border-bottom: 2px solid transparent;
+  }
+
+  .nav-links a:hover {
+    color: var(--black);
+    border-bottom-color: var(--red);
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+    margin-top: 56px;
+  }
+
+  .hero-left {
+    padding: 80px 48px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .hero-right {
+    padding: 80px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .hero-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 48px;
+  }
+
+  .status-dot {
+    width: 6px; height: 6px;
+    background: #00c853;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(56px, 7vw, 100px);
+    font-weight: 600;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 40px;
+  }
+
+  h1 .outline {
+    -webkit-text-stroke: 1.5px var(--black);
+    color: transparent;
+  }
+
+  h1 .red { color: var(--red); }
+
+  .hero-desc {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 400px;
+    line-height: 1.8;
+    margin-bottom: 40px;
+  }
+
+  .hero-desc strong { color: var(--black); font-weight: 500; }
+
+  .hero-links {
+    display: flex;
+    gap: 0;
+  }
+
+  .btn {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 14px 24px;
+    text-decoration: none;
+    transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--border);
+  }
+
+  .btn + .btn { border-left: none; }
+
+  .btn-primary {
+    background: var(--black);
+    color: var(--bg);
+  }
+
+  .btn-primary:hover { background: var(--red); border-color: var(--red); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--black);
+  }
+
+  .btn-secondary:hover { background: var(--black); color: var(--bg); }
+
+  /* Hero right - big number grid */
+  /* EXPLORING BLOCK */
+  .exploring-block {
+    border: 1px solid var(--border);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    padding: 32px;
+    gap: 24px;
+  }
+
+  .exploring-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .exploring-category {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--red);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .exploring-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .exploring-entry {
+    padding: 16px 0;
+    border-top: 1px solid var(--surface);
+  }
+
+  .exploring-entry:first-of-type { border-top: none; padding-top: 0; }
+
+  .exploring-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+
+  .exploring-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .exploring-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0 -32px;
+  }
+
+  /* SECTION */
+  .section {
+    position: relative;
+    z-index: 1;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+
+  .section-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-title::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--red);
+    border-radius: 50%;
+  }
+
+  .section-count {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  .section-body {
+    padding: 48px;
+  }
+
+  /* EXPERIENCE */
+  .exp-item {
+    border: 1px solid var(--border);
+    margin-bottom: -1px;
+    background: var(--white);
+    transition: background 0.15s;
+  }
+
+  .exp-item:hover { background: var(--surface); }
+
+  .exp-header {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 24px;
+    padding: 24px 28px;
+    cursor: pointer;
+  }
+
+  .exp-role {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--black);
+    margin-bottom: 4px;
+  }
+
+  .exp-company {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--red);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .exp-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+  }
+
+  .exp-toggle {
+    width: 24px; height: 24px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    color: var(--black);
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+
+  .exp-item.open .exp-toggle {
+    background: var(--black);
+    color: var(--bg);
+    transform: rotate(45deg);
+  }
+
+  .exp-body {
+    display: none;
+    padding: 0 28px 24px;
+    border-top: 1px solid var(--border);
+    margin: 0 0 0 0;
+  }
+
+  .exp-item.open .exp-body { display: block; }
+
+  .exp-tech {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    padding: 12px 0;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .tech-tag {
+    padding: 3px 8px;
+    border: 1px solid var(--border);
+    color: var(--black);
+  }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .exp-bullets li {
+    font-size: 13px;
+    color: #444;
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.7;
+  }
+
+  .exp-bullets li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--red);
+    font-size: 18px;
+    line-height: 1.3;
+  }
+
+  .exp-bullets li strong { color: var(--black); font-weight: 600; }
+
+  /* OPEN SOURCE */
+  .os-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .os-card {
+    border: 1px solid var(--border);
+    margin: -1px 0 0 -1px;
+    padding: 36px 32px;
+    background: var(--white);
+    transition: background 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .os-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--red);
+    transform: scaleY(0);
+    transition: transform 0.2s;
+    transform-origin: bottom;
+  }
+
+  .os-card:hover::before { transform: scaleY(1); }
+  .os-card:hover { background: var(--surface); }
+
+  .os-org {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--red);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .os-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .os-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin-bottom: 18px;
+  }
+
+  .os-desc {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.8;
+  }
+
+  .os-desc strong { color: var(--black); font-weight: 500; }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+
+  .skill-block {
+    border: 1px solid var(--border);
+    margin: -1px 0 0 -1px;
+    padding: 28px 24px;
+    background: var(--white);
+  }
+
+  .skill-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--red);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .skill-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--black);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .skill-tag::before {
+    content: '';
+    width: 4px; height: 4px;
+    background: var(--border);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .skill-tag.featured::before { background: var(--red); }
+  .skill-tag.featured { color: var(--black); font-weight: 700; }
+
+  /* ACHIEVEMENTS */
+  .ach-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .ach-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    border: 1px solid var(--border);
+    margin-bottom: -1px;
+    background: var(--white);
+    transition: background 0.15s;
+  }
+
+  .ach-item:hover { background: var(--surface); }
+
+  .ach-index {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    padding: 24px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ach-text {
+    font-size: 14px;
+    color: #444;
+    padding: 24px 28px;
+    line-height: 1.7;
+  }
+
+  .ach-text strong { color: var(--black); font-weight: 600; }
+
+  /* CONTACT */
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-left {
+    padding: 80px 48px;
+    border-right: 1px solid var(--border);
+  }
+
+  .contact-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .contact-label::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--red);
+    border-radius: 50%;
+  }
+
+  .contact-left h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+
+  .contact-left h2 .outline {
+    -webkit-text-stroke: 1.5px var(--black);
+    color: transparent;
+  }
+
+  .contact-left p {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+
+  .contact-right {
+    padding: 80px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+  }
+
+  .contact-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border: 1px solid var(--border);
+    margin-bottom: -1px;
+    text-decoration: none;
+    color: var(--black);
+    transition: all 0.15s;
+    background: var(--white);
+  }
+
+  .contact-link:hover {
+    background: var(--black);
+    color: var(--bg);
+    border-color: var(--black);
+  }
+
+  .contact-link-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+
+  .contact-link-arrow {
+    font-size: 16px;
+    transition: transform 0.15s;
+  }
+
+  .contact-link:hover .contact-link-arrow { transform: translate(3px, -3px); }
+
+  /* FOOTER */
+  footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-top: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-cell {
+    padding: 20px 48px;
+    border-right: 1px solid var(--border);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    display: flex;
+    align-items: center;
+  }
+
+  .footer-cell:last-child { border-right: none; justify-content: flex-end; }
+
+  /* ANIMATIONS */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hero-left > * {
+    animation: fadeIn 0.6s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-left > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-left > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-left > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero-left > *:nth-child(4) { animation-delay: 0.4s; }
+
+  .hero-right { animation: fadeIn 0.6s 0.3s ease forwards; opacity: 0; }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links li:not(:last-child):not(:first-child) { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 60px 24px 40px; border-right: none; border-bottom: 1px solid var(--border); }
+    .hero-right { padding: 40px 24px; }
+    .section-body { padding: 24px; }
+    .section-header { padding: 16px 24px; }
+    .os-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .contact-wrap { grid-template-columns: 1fr; }
+    .contact-left { border-right: none; border-bottom: 1px solid var(--border); padding: 48px 24px; }
+    .contact-right { padding: 40px 24px; }
+    footer { grid-template-columns: 1fr; }
+    .footer-cell { padding: 16px 24px; border-right: none; border-top: 1px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-dot"></span>
+    AYMAN NAWAZ
+  </a>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#opensource">Open Source</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div>
+      <h1>
+        Software<br>
+        <span class="outline">Engin</span><span class="red">eer</span>
+      </h1>
+    </div>
+    <div>
+      <p class="hero-desc">
+        Building <strong>high-performance distributed systems</strong> at scale.
+        Currently at <strong>Microsoft Azure Storage</strong>, operating infrastructure
+        across 20PB+ of multi-tenant storage.
+      </p>
+      <div class="hero-links">
+        <a href="https://github.com/Ayman161803" class="btn btn-primary" target="_blank">↗ GitHub</a>
+        <a href="https://linkedin.com/in/ayman-nawaz-71a2a71b9" class="btn btn-secondary" target="_blank">LinkedIn</a>
+        <a href="mailto:mohammedaymannawaz@gmail.com" class="btn btn-secondary">Email</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="exploring-block">
+      <div class="exploring-label">
+        <span class="status-dot"></span>
+        Currently exploring
+      </div>
+
+      <div class="exploring-item">
+        <div class="exploring-category">ML Inference Engines</div>
+        <div class="exploring-entry">
+          <div class="exploring-name">SOFIE</div>
+          <div class="exploring-desc">Lightweight inference engine — digging into how it handles model execution, operator fusion, and memory layout under constrained environments.</div>
+        </div>
+        <div class="exploring-entry">
+          <div class="exploring-name">llama.cpp</div>
+          <div class="exploring-desc">Pure C/C++ LLM inference. Exploring quantisation strategies, KV cache mechanics, and what makes it fast enough to run on CPU.</div>
+        </div>
+      </div>
+
+      <div class="exploring-divider"></div>
+
+      <div class="exploring-item">
+        <div class="exploring-category">Agent Platforms</div>
+        <div class="exploring-entry">
+          <div class="exploring-name">Langfuse</div>
+          <div class="exploring-desc">Open-source LLM observability and evaluation platform. Interested in how it traces agent runs, scores outputs, and plugs into production pipelines.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="section" id="experience">
+  <div class="section-header">
+    <div class="section-title">Experience</div>
+    <div class="section-count">04 roles</div>
+  </div>
+  <div class="section-body">
+    <div class="exp-list">
+
+      <!-- Microsoft SWE -->
+      <div class="exp-item open reveal">
+        <div class="exp-header" onclick="toggleExp(this)">
+          <div>
+            <div class="exp-role">Software Engineer — Azure Storage Platform</div>
+            <div class="exp-company">Microsoft · Bangalore, India</div>
+          </div>
+          <div class="exp-date">May 2024 — Present</div>
+          <div class="exp-toggle">+</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-tech">
+            <span class="tech-tag">Go</span>
+            <span class="tech-tag">C#</span>
+            <span class="tech-tag">Kubernetes</span>
+            <span class="tech-tag">Prometheus</span>
+            <span class="tech-tag">.NET</span>
+          </div>
+          <ul class="exp-bullets">
+            <li>Eliminated race conditions in a multi-tenant system at <strong>20PB+ scale</strong> via fine-grained resource locking, reducing crash incidents by <strong>90%</strong>.</li>
+            <li>Engineered and maintained a datapath solution backing <strong>10 petabytes</strong> of distributed storage, designing architecture overhauls to cut incident time by <strong>half</strong>.</li>
+            <li>Led migration of user auth workflow to eliminate High Privilege Access with <strong>zero downtime</strong>.</li>
+            <li>Designed and evaluated a TCP parallelisation solution for NFS datastores, improving throughput by <strong>30% on average</strong> across workload profiles.</li>
+            <li>Designed a workload observability service processing <strong>~8,000 vSphere events/min</strong> via NLP model at <strong>95% accuracy</strong>; mentored an intern to implement it in pilot.</li>
+            <li>Introduced CI pipelines and DevOps practices adopted across the team.</li>
+            <li>Conducted <strong>20+ RCAs</strong> for critical customer downtimes across distributed storage systems.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Aroundly -->
+      <div class="exp-item reveal">
+        <div class="exp-header" onclick="toggleExp(this)">
+          <div>
+            <div class="exp-role">Founding Engineer</div>
+            <div class="exp-company">Aroundly · Remote</div>
+          </div>
+          <div class="exp-date">Feb 2024 — May 2024</div>
+          <div class="exp-toggle">+</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-tech">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">MongoDB</span>
+            <span class="tech-tag">PostgreSQL</span>
+          </div>
+          <ul class="exp-bullets">
+            <li>Designed query-optimised PostgreSQL and MongoDB schemas with indexing strategies for a high-throughput recommendations engine.</li>
+            <li>Built data pipelines to process and transform transaction data at scale.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Rewardwise -->
+      <div class="exp-item reveal">
+        <div class="exp-header" onclick="toggleExp(this)">
+          <div>
+            <div class="exp-role">Data Engineer Intern</div>
+            <div class="exp-company">Rewardwise · Remote</div>
+          </div>
+          <div class="exp-date">Jan 2024 — Feb 2024</div>
+          <div class="exp-toggle">+</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-tech">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">SQL</span>
+            <span class="tech-tag">Firebase</span>
+            <span class="tech-tag">Fluentd</span>
+            <span class="tech-tag">OpenTelemetry</span>
+          </div>
+          <ul class="exp-bullets">
+            <li>Designed and implemented a recommendations data platform using <strong>Firebase Analytics</strong> and cloud-native OTel tools (Fluentd, MDSD) to aggregate user metrics.</li>
+            <li>Automated reporting and analytics pipelines in Python/SQL, enabling real-time insights for partner merchants.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Microsoft Intern -->
+      <div class="exp-item reveal">
+        <div class="exp-header" onclick="toggleExp(this)">
+          <div>
+            <div class="exp-role">Software Engineering Intern — Azure Large Storage Instances</div>
+            <div class="exp-company">Microsoft · Hyderabad, India</div>
+          </div>
+          <div class="exp-date">May 2023 — Jul 2023</div>
+          <div class="exp-toggle">+</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-tech">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Azure</span>
+            <span class="tech-tag">REST APIs</span>
+          </div>
+          <ul class="exp-bullets">
+            <li>Automated IOPS performance validation for storage infrastructure, cutting validation effort by <strong>80%</strong>.</li>
+            <li>Resolved a critical billing infrastructure downtime for ALI through deep debugging and profiling of distributed storage transaction flows.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- OPEN SOURCE -->
+<div class="section" id="opensource">
+  <div class="section-header">
+    <div class="section-title">Open Source</div>
+    <div class="section-count">02 contributions</div>
+  </div>
+  <div class="section-body">
+    <div class="os-grid">
+      <div class="os-card reveal">
+        <div class="os-org">Vitess · Cloud Native Computing Foundation</div>
+        <div class="os-title">Linux Foundation Mentorship (LFX)</div>
+        <div class="os-date">Mar 2023 — May 2023 · Go, Yacc, MySQL</div>
+        <p class="os-desc">Extended <strong>Vitess</strong> — the database proxy powering YouTube, Slack, and GitHub — with MySQL spatial datatype compiler support. Authored Yacc grammar rules and implemented end-to-end query planning for spatial operators. <strong>Merged upstream.</strong></p>
+      </div>
+      <div class="os-card reveal">
+        <div class="os-org">Accord Project · Linux Foundation</div>
+        <div class="os-title">Summer of Code — Concerto Web Editor</div>
+        <div class="os-date">Jun 2022 — Aug 2022 · JavaScript, React, VSCode API</div>
+        <p class="os-desc">Built a <strong>monospace web editor</strong> for Concerto data models enabling AST manipulation without writing code. Compiled the Cicero VSCode Extension for the webworker context, refactored virtual file system handling, and added <strong>dynamic UML display</strong>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<div class="section" id="skills">
+  <div class="section-header">
+    <div class="section-title">Skills</div>
+    <div class="section-count">04 categories</div>
+  </div>
+  <div class="section-body">
+    <div class="skills-grid">
+      <div class="skill-block reveal">
+        <div class="skill-label">Core Language</div>
+        <div class="skill-tags">
+          <span class="skill-tag featured">Go</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">C / C++</span>
+          <span class="skill-tag">C#</span>
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">TypeScript</span>
+        </div>
+      </div>
+      <div class="skill-block reveal">
+        <div class="skill-label">Storage & Databases</div>
+        <div class="skill-tags">
+          <span class="skill-tag featured">PostgreSQL</span>
+          <span class="skill-tag featured">MySQL</span>
+          <span class="skill-tag">MongoDB</span>
+          <span class="skill-tag">Vitess</span>
+          <span class="skill-tag">NoSQL</span>
+        </div>
+      </div>
+      <div class="skill-block reveal">
+        <div class="skill-label">Concurrency & Systems</div>
+        <div class="skill-tags">
+          <span class="skill-tag featured">Distributed Systems</span>
+          <span class="skill-tag">Multi-threading</span>
+          <span class="skill-tag">Resource Locking</span>
+          <span class="skill-tag">LRU Caching</span>
+          <span class="skill-tag">Race Debugging</span>
+        </div>
+      </div>
+      <div class="skill-block reveal">
+        <div class="skill-label">Platform & Infra</div>
+        <div class="skill-tags">
+          <span class="skill-tag featured">Kubernetes</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Linux</span>
+          <span class="skill-tag">Azure</span>
+          <span class="skill-tag">TCP/IP</span>
+          <span class="skill-tag">Prometheus</span>
+          <span class="skill-tag">CI/CD</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ACHIEVEMENTS -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">Achievements</div>
+    <div class="section-count">03 highlights</div>
+  </div>
+  <div class="section-body">
+    <div class="ach-list">
+      <div class="ach-item reveal">
+        <div class="ach-index">01</div>
+        <div class="ach-text"><strong>JEE 2020</strong> — Top 0.45 percentile among ~1.5 million candidates nationally.</div>
+      </div>
+      <div class="ach-item reveal">
+        <div class="ach-index">02</div>
+        <div class="ach-text"><strong>Microsoft Engage 2022</strong> — Selected amongst top engineering students nationwide; built a music recommendation system.</div>
+      </div>
+      <div class="ach-item reveal">
+        <div class="ach-index">03</div>
+        <div class="ach-text"><strong>JP Morgan Code for Good 2023</strong> — Top 200 nationally; built pothole detection ML classifier at 90% accuracy for an NGO.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-wrap" id="contact">
+  <div class="contact-left">
+    <div class="contact-label">Get in touch</div>
+    <h2>Let's build<br><span class="outline">something</span><br>fast.</h2>
+    <p>Open to backend and infrastructure roles in Europe.<br>
+    NIT Surathkal · B.Tech Information Technology · GPA 9.08</p>
+    <div class="hero-links">
+      <a href="mailto:mohammedaymannawaz@gmail.com" class="btn btn-primary">↗ Email Me</a>
+    </div>
+  </div>
+  <div class="contact-right">
+    <a href="mailto:mohammedaymannawaz@gmail.com" class="contact-link">
+      <span class="contact-link-label">mohammedaymannawaz@gmail.com</span>
+      <span class="contact-link-arrow">↗</span>
+    </a>
+    <a href="https://linkedin.com/in/ayman-nawaz-71a2a71b9" class="contact-link" target="_blank">
+      <span class="contact-link-label">linkedin.com/in/ayman-nawaz-71a2a71b9</span>
+      <span class="contact-link-arrow">↗</span>
+    </a>
+    <a href="https://github.com/Ayman161803" class="contact-link" target="_blank">
+      <span class="contact-link-label">github.com/Ayman161803</span>
+      <span class="contact-link-arrow">↗</span>
+    </a>
+    <a href="+918861846438" class="contact-link">
+      <span class="contact-link-label">+91 88618 46438</span>
+      <span class="contact-link-arrow">↗</span>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-cell">Ayman Nawaz · Software Engineer</div>
+  <div class="footer-cell">NIT Surathkal · B.Tech IT · 2024</div>
+  <div class="footer-cell">Built with nothing.</div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    setTimeout(() => {
+      cursorRing.style.left = e.clientX + 'px';
+      cursorRing.style.top = e.clientY + 'px';
+    }, 60);
+  });
+
+  document.querySelectorAll('a, button, .exp-header, .os-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursorRing.style.width = '48px';
+      cursorRing.style.height = '48px';
+      cursorRing.style.borderColor = '#d9000d';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursorRing.style.width = '28px';
+      cursorRing.style.height = '28px';
+      cursorRing.style.borderColor = '#0d0d0d';
+    });
+  });
+
+  // Toggle experience
+  function toggleExp(header) {
+    const item = header.closest('.exp-item');
+    item.classList.toggle('open');
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 0.08 + 's';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
